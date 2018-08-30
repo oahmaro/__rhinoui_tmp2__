@@ -15,12 +15,14 @@ npm install --save rhino-ui
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'rhino-ui'
+import { Text, Theme } from 'rhino-ui'
 
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <Theme mode='dark'>
+        <Text>This is a Text component with dark theme!</Text>
+      </Theme>
     )
   }
 }
