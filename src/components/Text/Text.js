@@ -51,7 +51,7 @@ const Text = ({
 
 const styles = ({ styles, sizes, lang }) => ({
   text: {
-    display: ({ inline }) => inline ? 'inline' : 'block',
+    display: ({ inline, display }) => inline ? 'inline' : `${display}`,
     boxSizing: 'border-box',
     lineHeight: ({ lineHeight }) => `${lineHeight}px`,
     fontFamily: 'Roboto, Noto Kufi Arabic, sans-serif',
@@ -63,7 +63,7 @@ const styles = ({ styles, sizes, lang }) => ({
     fontWeight: ({ bold }) => (bold && 'bold') || 'normal',
     fontStyle: ({ italic }) => (italic && 'italic') || 'normal',
     color: ({ color }) => styles && (styles.text[color] || styles.state[color] || color),
-    width: ({ inline }) => inline ? 'auto' : '100%',
+    width: ({ width }) => width ? `${width}` : 'auto',
     userSelect: ({ selectable }) => selectable ? 'auto' : 'none',
     textDecoration: 'none',
     paddingTop: ({ padding, paddingY, paddingTop }) => (padding !== undefined && `${padding}px`) || (paddingY !== undefined && `${paddingY}px`) || (paddingTop !== undefined && `${paddingTop}px`),
@@ -127,6 +127,7 @@ Text.propTypes = {
 }
 
 Text.defaultProps = {
+  display: 'flex',
   align: 'left',
   color: 'primary',
   shadowColor: 'black',

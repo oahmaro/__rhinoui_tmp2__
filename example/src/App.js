@@ -82,7 +82,7 @@ theme.updateTheme({
 export default class App extends Component {
   render () {
     return (
-      <Rhino theme='dark' lang='en' data={theme.getTheme()}>
+      <Rhino theme='dark' lang='ar' data={theme.getTheme()}>
         <Fragment>
           <Box 
             id='background'
@@ -94,12 +94,19 @@ export default class App extends Component {
           <Box 
             position='relative' 
             zIndex={2} 
-            alignItems='center' 
             color='fill6'
             height={36} 
             borderBottom={0.5}
-            paddingLeft={50}>
-            <Text size='lg' color='primary'>Contacts</Text>
+            justifyContent='between'
+            >
+            <Box width={200} justifyContent='around'>
+              <Text lineHeight={36} translation='جهات الاتصال' size='lg' color='primary'>Contacts</Text>
+              <Text lineHeight={36} translation='تعديلات' size='sm' color='secondary'>Configurations</Text>
+            </Box>
+            <Box width={200} justifyContent='around'>
+              <Text lineHeight={36} translation='ملاحظات' size='sm' color='secondary'>Notification</Text>
+              <Text lineHeight={36} translation='الملف الشخصي' size='sm' color='secondary'>Profile</Text>
+            </Box>
           </Box>
           <Box 
             position='relative' 
