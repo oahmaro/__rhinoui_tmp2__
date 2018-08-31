@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
-import { Text, Rhino, createTheme } from 'rhino-ui'
+import { Text, Rhino, createTheme, Box } from 'rhino-ui'
 
 const modifier = (theme = {}, newTheme) => {
   return {
@@ -83,7 +83,45 @@ export default class App extends Component {
   render () {
     return (
       <Rhino theme='dark' lang='en' data={theme.getTheme()}>
-        <Text color='primary'>Testing</Text>
+        <Fragment>
+          <Box 
+            id='background'
+            zIndex={-1}
+            color='fill3'
+            position='absolute'
+            width='100%'
+            height='100%' />
+          <Box 
+            position='relative' 
+            zIndex={2} 
+            alignItems='center' 
+            color='fill6'
+            height={36} 
+            borderBottom={0.5}
+            paddingLeft={50}>
+            <Text size='lg' color='primary'>Contacts</Text>
+          </Box>
+          <Box 
+            position='relative' 
+            zIndex={1} 
+            alignItems='center' 
+            color='fill4' 
+            height={36} 
+            borderBottom={0.5} 
+            shadowY={1} 
+            shadowRadius={10}/>
+          <Box 
+            position='absolute' 
+            bottom 
+            zIndex={1} 
+            alignItems='center' 
+            color='fill4' 
+            height={36} 
+            width='100%' 
+            borderTop={0.5}
+            shadowY={1}
+            shadowRadius={10}/>
+        </Fragment>
       </Rhino>
     )
   }
