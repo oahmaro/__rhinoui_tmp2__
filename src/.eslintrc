@@ -1,5 +1,9 @@
 {
   "env": {
     "jest": true
+  },
+  "rules": {
+    // disable proptypes lint
+    "react/forbid-prop-types": 0
   }
 }
