@@ -1,10 +1,10 @@
 {
-  "name": "rhino-ui",
+  "name": "rhinoui",
   "version": "1.0.0",
   "description": "A set of React UI components that supports Rhino&#x27;s design language",
   "author": "oahmaro",
   "license": "MIT",
-  "repository": "oahmaro/rhino-ui",
+  "repository": "oahmaro/rhinoui",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -59,6 +59,7 @@
     "dist"
   ],
   "dependencies": {
-    "color": "^3.0.0"
+    "color": "^3.0.0",
+    "react-jss": "^8.6.1"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "rhino-ui-example",
-  "homepage": "https://oahmaro.github.io/rhino-ui",
+  "name": "rhinoui-example",
+  "homepage": "https://oahmaro.github.io/rhinoui",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "rhino-ui": "link:.."
+    "rhinoui": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",

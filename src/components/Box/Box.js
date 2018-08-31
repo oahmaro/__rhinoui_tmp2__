@@ -161,7 +161,7 @@ Box.propTypes = {
   children: PropTypes.node,
   wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse']),
   display: PropTypes.oneOf(['none', 'flex', 'inline-flex']),
-  justifyContent: PropTypes.oneOf(['start', 'end', 'center', 'between', 'arround', 'evenly']),
+  justifyContent: PropTypes.oneOf(['start', 'end', 'center', 'between', 'around', 'evenly']),
   alignItems: PropTypes.oneOf(['start', 'end', 'center', 'stretch', 'baseline']),
   alignContent: PropTypes.oneOf(['start', 'end', 'center', 'stretch', 'between', 'around']),
   flex: PropTypes.oneOf(['grow', 'shrink', 'none']),
