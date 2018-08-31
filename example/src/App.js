@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import { Text, Rhino, createTheme, Box } from 'rhino-ui'
+import { Text, Rhino, createTheme, Box } from 'rhinoui'
 
 const modifier = (theme = {}, newTheme) => {
   return {

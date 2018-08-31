@@ -1,11 +1,11 @@
-// This file will create a namespace specific to rhino-ui library
+// This file will create a namespace specific to rhinoui library
 // So it doesn't conflict with other themeing libraries
 import React from 'react'
 import { createTheming } from 'react-jss'
 import PropTypes from 'prop-types'
 
 // Creating a namespaced theming object.
-const theming = createTheming('__rhino-ui__')
+const theming = createTheming('__rhinoui__')
 
 const { ThemeProvider: MyThemeProvider } = theming
 
