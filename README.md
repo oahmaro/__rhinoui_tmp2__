@@ -12,6 +12,7 @@ npm install --save rhino-ui
 
 ## Usage
 
+### Basic 
 ```jsx
 import React, { Component } from 'react'
 
@@ -26,6 +27,52 @@ class Example extends Component {
     )
   }
 }
+```
+Rhino Component is a provider component, it should be set at the highest level of your app, if not, compoenent will rely on thier default prop values.
+
+### Theming
+The idea is that you import a createTheme, pass a modifier function as its first argument, and then call an updateTheme method avaliable on createTheme to update the theme.
+
+```jsx
+import React, {Component } from 'react'
+
+import { Text, Rhino, createTheme } from 'rhino-ui'
+
+// Modifier that will update the theme object
+const modifier = ( theme = {}, newTheme ) => {
+  return {
+    ...theme,
+    ...newTheme
+  }
+}
+
+// Create theme object passing it a modifer function
+const theme = createTheme(modifier)
+
+// Call a method on createTheme to update your the themes object
+theme.updateTheme({
+  dark: {
+    text: {
+      primary: 'white'
+    }
+  },
+  light: {
+    text: {
+      primary: 'black'
+    }
+  }
+})
+
+class App extends Component {
+  render() {
+    return (
+      // Pass the theme object inside the data prop
+      <Rhino theme='dark' lang='en' data={theme.getTheme()}>
+        <Text>This is a Text component with dark theme!</Text>
+      </Rhino>
+    )
+  }
+} 
 ```
 
 ## License
