@@ -74,7 +74,7 @@ const flexMap = {
   baseline: 'baseline'
 }
 
-const styles = ({ styles }) => ({
+const styles = ({ styles, lang }) => ({
   box: {
     display: ({ display }) => `${display}`,
     position: ({ position }) => `${position}`,
@@ -83,7 +83,7 @@ const styles = ({ styles }) => ({
     bottom: ({ bottom }) => typeof bottom === 'boolean' ? bottom && 0 : `${bottom}`,
     left: ({ left }) => typeof left === 'boolean' ? left && 0 : `${left}`,
     flex: ({ flex }) => (flex === 'grow' && '1 1 auto') || (flex === 'shrink' && '0 1 auto') || (flex === 'none' && '0 0 auto'),
-    flexDirection: ({ flexDirection }) => `${flexDirection}`,
+    flexDirection: ({ flexDirection }) => flexDirection ? `${flexDirection}` : (lang.locale === 'en' && 'row') || (lang.locale === 'ar' && 'row-reverse'),
     flexWrap: ({ wrap }) => `${wrap}`,
     justifyContent: ({ justifyContent }) => `${flexMap[justifyContent]}`,
     alignItems: ({ alignItems }) => `${flexMap[alignItems]}`,
@@ -235,7 +235,6 @@ Box.defaultProps = {
   shadowOpacity: 1,
   borderWidth: 0,
   zIndex: 1,
-  flexDirection: 'row',
   borderColor: 'fill2'
 }
 
