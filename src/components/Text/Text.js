@@ -1,9 +1,11 @@
 import React from 'react'
 import injectSheet from 'react-jss'
 import PropTypes from 'prop-types'
-// import Color from 'color'
+import './fonts.css'
+import Color from 'color'
 
 const Text = ({
+  theme,
   classes,
   children,
   style,
@@ -38,19 +40,49 @@ const Text = ({
   marginRight,
   marginBottom,
   marginLeft,
-  translation
-}) => {
-  const Tag = inline ? 'span' : 'p'
+  translation }) => {
+  const Tag = inline && !link ? 'span' : link ? 'a' : 'p'
   return (
-    <Tag>
-      { children }
+    <Tag className={classes.text} style={style} onClick={onClick} href={href}>
+      { (theme.lang.locale === 'en' && children) || (theme.lang.locale === 'ar' && translation) }
     </Tag>
   )
 }
 
-const styles = {
-
-}
+const styles = ({ styles, sizes, lang }) => ({
+  text: {
+    display: ({ inline }) => inline ? 'inline' : 'block',
+    boxSizing: 'border-box',
+    lineHeight: ({ lineHeight }) => `${lineHeight}px`,
+    fontFamily: 'Roboto, Noto Kufi Arabic, sans-serif',
+    overflow: 'hidden',
+    textOverflow: ({ overflow }) => overflow === 'ellipsis' ? 'ellipsis' : 'clip',
+    wordWrap: ({ overflow }) => overflow === 'break' ? 'break-word' : overflow,
+    hyphens: 'initial',
+    textAlign: ({ align }) => `${align}`,
+    fontWeight: ({ bold }) => (bold && 'bold') || 'normal',
+    fontStyle: ({ italic }) => (italic && 'italic') || 'normal',
+    color: ({ color }) => styles && (styles.text[color] ? `${styles.text[color]}` : `${color}`),
+    width: ({ inline }) => inline ? 'auto' : '100%',
+    userSelect: ({ selectable }) => selectable ? 'auto' : 'none',
+    textDecoration: 'none',
+    paddingTop: ({ padding, paddingY, paddingTop }) => (padding !== undefined && `${padding}px`) || (paddingY !== undefined && `${paddingY}px`) || (paddingTop !== undefined && `${paddingTop}px`),
+    paddingRight: ({ padding, paddingX, paddingRight }) => (padding !== undefined && `${padding}px`) || (paddingX !== undefined && `${paddingX}px`) || (paddingRight !== undefined && `${paddingRight}px`),
+    paddingBottom: ({ padding, paddingY, paddingBottom }) => (padding !== undefined && `${padding}px`) || (paddingY !== undefined && `${paddingY}px`) || (paddingBottom !== undefined && `${paddingBottom}px`),
+    paddingLeft: ({ padding, paddingX, paddingLeft }) => (padding !== undefined && `${padding}px`) || (paddingX !== undefined && `${paddingX}px`) || (paddingLeft !== undefined && `${paddingLeft}px`),
+    marginTop: ({ margin, marginY, marginTop }) => (margin !== undefined && `${margin}px`) || (marginY !== undefined && `${marginY}px`) || (marginTop !== undefined && `${marginTop}px`),
+    marginRight: ({ margin, marginX, marginRight }) => (margin !== undefined && `${margin}px`) || (marginX !== undefined && `${marginX}px`) || (marginRight !== undefined && `${marginRight}px`),
+    marginBottom: ({ margin, marginY, marginBottom }) => (margin !== undefined && `${margin}px`) || (marginY !== undefined && `${marginY}px`) || (marginBottom !== undefined && `${marginBottom}px`),
+    marginLeft: ({ margin, marginX, marginLeft }) => (margin !== undefined && `${margin}px`) || (marginX !== undefined && `${marginX}px`) || (marginLeft !== undefined && `${marginLeft}px`),
+    textShadow: ({ shadowX, shadowY, shadowRadius, shadowOpacity, shadowColor }) => {
+      const _color = Color(shadowColor)
+      return (shadowX || shadowY) !== undefined ? `${shadowX}px ${shadowY}px ${shadowRadius}px rgba(${_color.red()}, ${_color.green()}, ${_color.blue()}, ${_color.alpha() * shadowOpacity})` : ''
+    },
+    direction: () => lang.direction,
+    fontSize: ({ size }) => (sizes !== undefined) && ((typeof size === 'string' && `${sizes[size]}`) || (typeof size === 'number' && `${size}px`)),
+    cursor: ({ link }) => link ? 'pointer' : 'auto'
+  }
+})
 
 Text.propTypes = {
   children: PropTypes.node,
@@ -93,7 +125,8 @@ Text.propTypes = {
   marginBottom: PropTypes.number,
   marginLeft: PropTypes.number,
   translation: PropTypes.string,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  theme: PropTypes.object
 }
 
 Text.defaultProps = {
@@ -103,9 +136,10 @@ Text.defaultProps = {
   shadowX: 0,
   shadowY: 0,
   shadowRadius: 0,
-  shadowOpacity: 1,
+  shadowOpacity: 0.01,
   size: 'sm',
-  overflow: 'normal'
+  overflow: 'normal',
+  marginY: 0
 }
 
 export default injectSheet(styles)(Text)

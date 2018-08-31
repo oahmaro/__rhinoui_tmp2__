@@ -60,10 +60,25 @@ theme.updateTheme({
       fill8: '#517C8A',
       fill9: '#3C6B7C'
     }
-  }  
+  },
+  sizes: {
+    ar: {
+      xs: '11px',
+      sm: '13px',
+      md: '15px',
+      lg: '17px',
+      xl: '21px'
+    },
+    en: {
+      xs: '12px',
+      sm: '14px',
+      md: '16px',
+      lg: '18px',
+      xl: '22px'
+    }
+  }
 })
 
-console.log(theme.getTheme())
 export default class App extends Component {
   render () {
     return (
