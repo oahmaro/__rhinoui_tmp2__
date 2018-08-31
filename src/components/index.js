@@ -1,2 +1,2 @@
-export { default as Theme } from './Theme'
+export { default as Rhino } from './Rhino'
 export { default as Text } from './Text'

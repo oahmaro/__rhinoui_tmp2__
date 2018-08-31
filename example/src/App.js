@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-import { Text, Theme } from 'rhino-ui'
+import { Text, Rhino } from 'rhino-ui'
 
 export default class App extends Component {
   render () {
     return (
-      <Theme mode='dark'>
+      <Rhino theme='dark'>
         <Text>Testing</Text>
-      </Theme>
+      </Rhino>
     )
   }
 }
