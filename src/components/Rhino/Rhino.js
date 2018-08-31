@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { createTheming } from 'react-jss'
-import { rhinoTheme } from '../../utils/colors'
+
 // Creating a namespaced theming object.
 const theming = createTheming('__RHINO_UI_THEME__')
 const { ThemeProvider } = theming
@@ -10,7 +10,8 @@ class Rhino extends Component {
   static propTypes = {
     children: PropTypes.element,
     theme: PropTypes.string,
-    lang: PropTypes.string
+    lang: PropTypes.string,
+    data: PropTypes.object
   }
 
   setTheme = (theme) => {
@@ -33,10 +34,10 @@ class Rhino extends Component {
   }
 
   componentDidMount() {
-    const { theme, lang } = this.props
+    const { theme, lang, data } = this.props
     theme && this.setTheme(theme)
     lang && this.setLanguage(lang)
-    this.setState({ styles: rhinoTheme })
+    this.setState({ styles: data })
   }
 
   render() {
