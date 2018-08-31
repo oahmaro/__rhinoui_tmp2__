@@ -62,7 +62,7 @@ const styles = ({ styles, sizes, lang }) => ({
     textAlign: ({ align }) => `${align}`,
     fontWeight: ({ bold }) => (bold && 'bold') || 'normal',
     fontStyle: ({ italic }) => (italic && 'italic') || 'normal',
-    color: ({ color }) => styles && (styles.text[color] ? `${styles.text[color]}` : `${color}`),
+    color: ({ color }) => styles && (styles.text[color] || styles.state[color] || color),
     width: ({ inline }) => inline ? 'auto' : '100%',
     userSelect: ({ selectable }) => selectable ? 'auto' : 'none',
     textDecoration: 'none',
@@ -90,10 +90,7 @@ Text.propTypes = {
   align: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
   bold: PropTypes.bool,
   italic: PropTypes.bool,
-  color: PropTypes.oneOfType([
-    PropTypes.oneOf(['primary', 'secondary', 'disabled', 'other']),
-    PropTypes.string
-  ]),
+  color: PropTypes.string,
   inline: PropTypes.bool,
   shadowColor: PropTypes.string,
   shadowX: PropTypes.number,

@@ -83,7 +83,7 @@ export default class App extends Component {
   render () {
     return (
       <Rhino theme='dark' lang='en' data={theme.getTheme()}>
-        <Text>Testing</Text>
+        <Text color='primary'>Testing</Text>
       </Rhino>
     )
   }
