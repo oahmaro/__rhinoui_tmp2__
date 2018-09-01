@@ -63,7 +63,7 @@ const styles = ({ styles, sizes, lang }) => ({
     fontWeight: ({ bold }) => (bold && 'bold') || 'normal',
     fontStyle: ({ italic }) => (italic && 'italic') || 'normal',
     color: ({ color }) => styles && (styles.text[color] || styles.state[color] || color),
-    width: ({ width }) => width ? `${width}` : 'auto',
+    width: 'auto',
     userSelect: ({ selectable }) => selectable ? 'auto' : 'none',
     textDecoration: 'none',
     paddingTop: ({ padding, paddingY, paddingTop }) => (padding !== undefined && `${padding}px`) || (paddingY !== undefined && `${paddingY}px`) || (paddingTop !== undefined && `${paddingTop}px`),
@@ -79,7 +79,7 @@ const styles = ({ styles, sizes, lang }) => ({
       return (shadowX || shadowY) !== undefined ? `${shadowX}px ${shadowY}px ${shadowRadius}px rgba(${_color.red()}, ${_color.green()}, ${_color.blue()}, ${_color.alpha() * shadowOpacity})` : ''
     },
     direction: () => lang.direction,
-    fontSize: ({ size }) => (sizes !== undefined) && ((typeof size === 'string' && `${sizes[size]}`) || (typeof size === 'number' && `${size}px`)),
+    fontSize: ({ size }) => (sizes !== undefined) && ((typeof size === 'string' && (`${sizes[size]}` || `${size}`)) || (typeof size === 'number' && `${size}px`)),
     cursor: ({ link }) => link ? 'pointer' : 'auto'
   }
 })
@@ -99,7 +99,7 @@ Text.propTypes = {
   shadowRadius: PropTypes.number,
   selectable: PropTypes.bool,
   size: PropTypes.oneOfType([
-    PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+    PropTypes.string,
     PropTypes.number
   ]),
   overflow: PropTypes.oneOf(['normal', 'break', 'ellipsis']),

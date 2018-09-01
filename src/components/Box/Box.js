@@ -153,10 +153,7 @@ Box.propTypes = {
   maxWidth: PropTypes.number,
   minHeight: PropTypes.number,
   minWidth: PropTypes.number,
-  color: PropTypes.oneOfType([
-    PropTypes.oneOf(['fill1', 'fill2', 'fill3', 'fill4', 'fill5', 'fill6', 'fill7', 'fill8', 'fill9']),
-    PropTypes.string
-  ]),
+  color: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.node,
   wrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse']),
