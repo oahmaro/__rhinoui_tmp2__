@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import { Text, Rhino, createTheme, Box } from 'rhinoui'
+import { Text, Rhino, createTheme, Box, Icon } from 'rhinoui'
 
 const modifier = (theme = {}, newTheme) => {
   return {
@@ -82,7 +82,7 @@ theme.updateTheme({
 export default class App extends Component {
   render () {
     return (
-      <Rhino theme='dark' lang='ar' data={theme.getTheme()}>
+      <Rhino theme='dark' lang='en' data={theme.getTheme()}>
         <Fragment>
           <Box 
             id='background'
@@ -99,9 +99,10 @@ export default class App extends Component {
             borderBottom={0.5}
             justifyContent='between'
             >
-            <Box width={200} justifyContent='around'>
-              <Text lineHeight={36} translation='جهات الاتصال' size='lg' color='primary'>Contacts</Text>
-              <Text lineHeight={36} translation='تعديلات' size='sm' color='secondary'>Configurations</Text>
+            <Box>
+              <Icon color='primary' icon='app'/>
+              <Text paddingX={10} lineHeight={36} translation='جهات الاتصال' size='lg' color='primary'>Contacts</Text>
+              <Text paddingX={10} lineHeight={36} translation='تعديلات' size='sm' color='secondary'>Configurations</Text>
             </Box>
             <Box width={200} justifyContent='around'>
               <Text lineHeight={36} translation='ملاحظات' size='sm' color='secondary'>Notification</Text>
@@ -116,7 +117,17 @@ export default class App extends Component {
             height={36} 
             borderBottom={0.5} 
             shadowY={1} 
-            shadowRadius={10}/>
+            shadowRadius={15}
+            shadowOpacity={0.35}>
+            <Text 
+              marginX={20} 
+              lineHeight={36} 
+              translation='تغير المظهر' 
+              size='sm' 
+              color='key'
+              link>
+              Change Theme</Text>
+          </Box>
           <Box 
             position='absolute' 
             bottom 
@@ -127,7 +138,9 @@ export default class App extends Component {
             width='100%' 
             borderTop={0.5}
             shadowY={1}
-            shadowRadius={10}/>
+            shadowRadius={15}
+            shadowOpacity={0.35}
+            />
         </Fragment>
       </Rhino>
     )
