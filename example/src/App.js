@@ -87,14 +87,14 @@ export default class App extends Component {
           <Box 
             id='background'
             zIndex={-1}
-            color='fill3'
+            boxColor='fill3'
             position='absolute'
             width='100%'
             height='100%' />
           <Box 
             position='relative' 
             zIndex={2} 
-            color='fill6'
+            boxColor='fill6'
             height={36} 
             borderBottom={0.5}
             justifyContent='between'
@@ -113,11 +113,12 @@ export default class App extends Component {
             position='relative' 
             zIndex={1} 
             alignItems='center' 
-            color='fill4' 
+            boxColor='fill4' 
             height={36} 
             borderBottom={0.5} 
             shadowY={1} 
-            shadowRadius={15}
+            shadowRadius={2}
+            shadowBlur={5}
             shadowOpacity={0.35}>
             <Text 
               marginX={20} 
@@ -133,12 +134,13 @@ export default class App extends Component {
             bottom 
             zIndex={1} 
             alignItems='center' 
-            color='fill4' 
+            boxColor='fill4' 
             height={36} 
             width='100%' 
             borderTop={0.5}
             shadowY={1}
-            shadowRadius={15}
+            shadowRadius={2}
+            shadowBlur={5}
             shadowOpacity={0.35}
             />
         </Fragment>
