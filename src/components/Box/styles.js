@@ -1,6 +1,6 @@
 import Color from 'color'
 
-const flexMap = {
+const propMap = {
   start: 'flex-start',
   end: 'flex-end',
   center: 'center',
@@ -32,27 +32,49 @@ export const _styles = ({ styles, lang }) => ({
 
     // Color Props
     // --------------
-    background: ({ boxColor }) => styles && styles.ui[boxColor] !== undefined ? `${styles.ui[boxColor]}` : `${boxColor}`,
+    background: ({ boxColor }) => {
+      if (styles) {
+        if (styles.text[boxColor] !== undefined) {
+          return `${styles.text[boxColor]}`
+        } else if (styles.ui[boxColor] !== undefined) {
+          return `${styles.ui[boxColor]}`
+        } else if (styles.state[boxColor] !== undefined) {
+          return `${styles.state[boxColor]}`
+        } else return `${boxColor}`
+      }
+    },
     '&:hover': {
-      background: ({ boxHoverColor, disabled, color }) => {
-        if (!disabled && styles) {
-          if (styles.state[color] !== undefined || styles.ui[color] !== undefined) {
-            const _color = Color((styles.state[color]) || (styles.ui[color])).darken(0.20).rgb().string()
-            return _color
-          } else return `${boxHoverColor}`
+      background: ({ boxHoverColor, link, boxColor }) => {
+        if (boxHoverColor !== undefined) {
+          if (styles && link) {
+            if (styles.text[boxHoverColor]) {
+              return Color((styles.text[boxHoverColor])).darken(0.20).rgb().string()
+            } else if (styles.state[boxHoverColor]) {
+              return Color((styles.state[boxHoverColor])).darken(0.20).rgb().string()
+            } else if (styles.ui[boxHoverColor] !== undefined) {
+              return Color((styles.ui[boxHoverColor])).darken(0.20).rgb().string()
+            } else return `${boxHoverColor}`
+          }
+        } else if (styles && link) {
+          return Color(styles.text[boxColor] || styles.state[boxColor] || styles.ui[boxColor] || boxColor).darken(0.20).rgb().string()
         }
-      }
-    },
+      }},
     '&:active': {
-      background: ({ boxActiveColor, disabled, color }) => {
-        if (!disabled && styles) {
-          if (styles.state[color] !== undefined || styles.ui[color] !== undefined) {
-            const _color = Color((styles.state[color]) || (styles.ui[color])).darken(0.50).rgb().string()
-            return _color
-          } else return `${boxActiveColor}`
+      background: ({ boxActiveColor, link, boxColor }) => {
+        if (boxActiveColor !== undefined) {
+          if (styles && link) {
+            if (styles.text[boxActiveColor]) {
+              return Color((styles.text[boxActiveColor])).darken(0.50).rgb().string()
+            } else if (styles.state[boxActiveColor]) {
+              return Color((styles.state[boxActiveColor])).darken(0.50).rgb().string()
+            } else if (styles.ui[boxActiveColor] !== undefined) {
+              return Color((styles.ui[boxActiveColor])).darken(0.50).rgb().string()
+            } else return `${boxActiveColor}`
+          }
+        } else if (styles && link) {
+          return Color(styles.text[boxColor] || styles.state[boxColor] || styles.ui[boxColor] || boxColor).darken(0.50).rgb().string()
         }
-      }
-    },
+      }},
 
     // Width & Height Props
     // --------------------
@@ -72,9 +94,9 @@ export const _styles = ({ styles, lang }) => ({
       } else return (lang.locale === 'en' && 'row') || (lang.locale === 'ar' && 'row-reverse')
     },
     flexWrap: ({ wrap }) => `${wrap}`,
-    justifyContent: ({ justifyContent }) => `${flexMap[justifyContent]}`,
-    alignItems: ({ alignItems }) => `${flexMap[alignItems]}`,
-    alignContent: ({ alignContent }) => `${flexMap[alignContent]}`,
+    justifyContent: ({ justifyContent }) => `${propMap[justifyContent]}`,
+    alignItems: ({ alignItems }) => `${propMap[alignItems]}`,
+    alignContent: ({ alignContent }) => `${propMap[alignContent]}`,
 
     // // Border Props
     // // ------------
@@ -117,46 +139,16 @@ export const _styles = ({ styles, lang }) => ({
 
     // // Padding props
     // // -------------
-    paddingTop: ({ padding, paddingY, paddingTop }) => (
-      (padding && `${padding}px`) ||
-      (paddingY && `${paddingY}px`) ||
-      (paddingTop && `${paddingTop}px`)),
-
-    paddingRight: ({ padding, paddingX, paddingRight }) => (
-      (padding && `${padding}px`) ||
-      (paddingX && `${paddingX}px`) ||
-      (paddingRight && `${paddingRight}px`)),
-
-    paddingBottom: ({ padding, paddingY, paddingBottom }) => (
-      (padding && `${padding}px`) ||
-      (paddingY && `${paddingY}px`) ||
-      (paddingBottom && `${paddingBottom}px`)),
-
-    paddingLeft: ({ padding, paddingX, paddingLeft }) => (
-      (padding && `${padding}px`) ||
-      (paddingX && `${paddingX}px`) ||
-      (paddingLeft && `${paddingLeft}px`)),
+    paddingTop: ({ padding, paddingY, paddingTop }) => (padding || paddingY || paddingTop) || 0,
+    paddingRight: ({ padding, paddingX, paddingRight }) => (padding || paddingX || paddingRight) || 0,
+    paddingBottom: ({ padding, paddingY, paddingBottom }) => (padding || paddingY || paddingBottom) || 0,
+    paddingLeft: ({ padding, paddingX, paddingLeft }) => (padding || paddingX || paddingLeft) || 0,
 
     // // Margin Props
     // // ------------
-    marginTop: ({ margin, marginY, marginTop }) => (
-      (margin && `${margin}px`) ||
-      (marginY && `${marginY}px`) ||
-      (marginTop && `${marginTop}px`)),
-
-    marginRight: ({ margin, marginX, marginRight }) => (
-      (margin && `${margin}px`) ||
-      (marginX && `${marginX}px`) ||
-      (marginRight && `${marginRight}px`)),
-
-    marginBottom: ({ margin, marginY, marginBottom }) => (
-      (margin && `${margin}px`) ||
-      (marginY && `${marginY}px`) ||
-      (marginBottom && `${marginBottom}px`)),
-
-    marginLeft: ({ margin, marginX, marginLeft }) => (
-      (margin && `${margin}px`) ||
-      (marginX && `${marginX}px`) ||
-      (marginLeft && `${marginLeft}px`))
+    marginTop: ({ margin, marginY, marginTop }) => (margin || marginY || marginTop) || 0,
+    marginRight: ({ margin, marginX, marginRight }) => (margin || marginX || marginRight) || 0,
+    marginBottom: ({ margin, marginY, marginBottom }) => (margin || marginY || marginBottom) || 0,
+    marginLeft: ({ margin, marginX, marginLeft }) => (margin || marginX || marginLeft) || 0
   }
 })

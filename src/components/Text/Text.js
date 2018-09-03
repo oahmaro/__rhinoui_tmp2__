@@ -2,142 +2,103 @@ import React from 'react'
 import injectSheet from 'react-jss'
 import PropTypes from 'prop-types'
 import './fonts.css'
-import Color from 'color'
+import { _styles } from './styles'
+import Box from '../Box'
 
-const Text = ({
-  theme,
-  classes,
-  children,
-  style,
-  align,
-  bold,
-  italic,
-  color,
-  inline,
-  shadowColor,
-  shadowX,
-  shadowY,
-  shadowOpacity,
-  shadowRadius,
-  selectable,
-  size,
-  overflow,
-  lineHeight,
-  link,
-  href,
-  onClick,
-  padding,
-  paddingX,
-  paddingY,
-  paddingTop,
-  paddingRight,
-  paddingBottom,
-  paddingLeft,
-  margin,
-  marginX,
-  marginY,
-  marginTop,
-  marginRight,
-  marginBottom,
-  marginLeft,
-  translation }) => {
-  const Tag = inline && !link ? 'span' : link ? 'a' : 'p'
+const Text = ({...props}) => {
   return (
-    <Tag className={classes.text} style={style} onClick={onClick} href={href}>
-      { (theme.lang.locale === 'en' && children) || (theme.lang.locale === 'ar' && translation) }
-    </Tag>
+    <Box
+      link={props.link}
+      margin={0}
+      padding={0}
+      id={props.id}
+      jssStyles={props.classes.text}
+      style={props.style}
+      href={props.href}
+      tag={!props.link ? 'p' : 'a'} // render a <p> or a <a> element
+      width='100%'
+      height='100%'
+      onClick={props.onClick}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
+      boxColor={props.boxColor}
+      boxHoverColor={props.boxHoverColor}
+      boxActiveColor={props.boxActiveColor}>
+      { (props.theme.lang.locale === 'en' && props.children) || (props.theme.lang.locale === 'ar' && (props.translation || 'no data')) }
+    </Box>
   )
 }
 
-const styles = ({ styles, sizes, lang }) => ({
-  text: {
-    display: ({ inline, display }) => inline ? 'inline' : `${display}`,
-    boxSizing: 'border-box',
-    lineHeight: ({ lineHeight }) => `${lineHeight}px`,
-    fontFamily: 'Roboto, Noto Kufi Arabic, sans-serif',
-    overflow: 'hidden',
-    textOverflow: ({ overflow }) => overflow === 'ellipsis' ? 'ellipsis' : 'clip',
-    wordWrap: ({ overflow }) => overflow === 'break' ? 'break-word' : overflow,
-    hyphens: 'initial',
-    textAlign: ({ align }) => `${align}`,
-    fontWeight: ({ bold }) => (bold && 'bold') || 'normal',
-    fontStyle: ({ italic }) => (italic && 'italic') || 'normal',
-    color: ({ color }) => styles && (styles.text[color] || styles.state[color] || color),
-    width: 'auto',
-    userSelect: ({ selectable }) => selectable ? 'auto' : 'none',
-    textDecoration: 'none',
-    paddingTop: ({ padding, paddingY, paddingTop }) => (padding !== undefined && `${padding}px`) || (paddingY !== undefined && `${paddingY}px`) || (paddingTop !== undefined && `${paddingTop}px`),
-    paddingRight: ({ padding, paddingX, paddingRight }) => (padding !== undefined && `${padding}px`) || (paddingX !== undefined && `${paddingX}px`) || (paddingRight !== undefined && `${paddingRight}px`),
-    paddingBottom: ({ padding, paddingY, paddingBottom }) => (padding !== undefined && `${padding}px`) || (paddingY !== undefined && `${paddingY}px`) || (paddingBottom !== undefined && `${paddingBottom}px`),
-    paddingLeft: ({ padding, paddingX, paddingLeft }) => (padding !== undefined && `${padding}px`) || (paddingX !== undefined && `${paddingX}px`) || (paddingLeft !== undefined && `${paddingLeft}px`),
-    marginTop: ({ margin, marginY, marginTop }) => (margin !== undefined && `${margin}px`) || (marginY !== undefined && `${marginY}px`) || (marginTop !== undefined && `${marginTop}px`),
-    marginRight: ({ margin, marginX, marginRight }) => (margin !== undefined && `${margin}px`) || (marginX !== undefined && `${marginX}px`) || (marginRight !== undefined && `${marginRight}px`),
-    marginBottom: ({ margin, marginY, marginBottom }) => (margin !== undefined && `${margin}px`) || (marginY !== undefined && `${marginY}px`) || (marginBottom !== undefined && `${marginBottom}px`),
-    marginLeft: ({ margin, marginX, marginLeft }) => (margin !== undefined && `${margin}px`) || (marginX !== undefined && `${marginX}px`) || (marginLeft !== undefined && `${marginLeft}px`),
-    textShadow: ({ shadowX, shadowY, shadowRadius, shadowOpacity, shadowColor }) => {
-      const _color = Color(shadowColor)
-      return (shadowX || shadowY) !== undefined ? `${shadowX}px ${shadowY}px ${shadowRadius}px rgba(${_color.red()}, ${_color.green()}, ${_color.blue()}, ${_color.alpha() * shadowOpacity})` : ''
-    },
-    direction: () => lang.direction,
-    fontSize: ({ size }) => (sizes !== undefined) && ((typeof size === 'string' && (`${sizes[size]}` || `${size}`)) || (typeof size === 'number' && `${size}px`)),
-    cursor: ({ link }) => link ? 'pointer' : 'auto'
-  }
-})
+// Styles logic is imported from _styles.js
+// Destructuring styles & lang from theme props passed from Rhino (Provider Component)
+// Theme object contains the following properties { theme, lang, sizes, styles, setTheme, setLang }
+const styles = ({ styles, lang, sizes }) => _styles({ styles, lang, sizes })
 
 Text.propTypes = {
-  children: PropTypes.node,
+  // Standard Props
+  // --------------
+  display: PropTypes.oneOf(['none', 'block']),
+  overflow: PropTypes.oneOf(['normal', 'break', 'ellipsis']),
+  id: PropTypes.string,
   style: PropTypes.object,
-  align: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
-  bold: PropTypes.bool,
-  italic: PropTypes.bool,
-  color: PropTypes.string,
-  inline: PropTypes.bool,
+  classes: PropTypes.object,
+  children: PropTypes.node,
+  tag: PropTypes.oneOf(['p', 'a']),
+  theme: PropTypes.object,
+  translation: PropTypes.string,
+
+  // Color Props
+  // -----------
+  textColor: PropTypes.string,
+  textHoverColor: PropTypes.string,
+  textActiveColor: PropTypes.string,
+  boxColor: PropTypes.string,
+  boxHoverColor: PropTypes.string,
+  boxActiveColor: PropTypes.string,
+
+  // Shadow Props
+  // ------------
   shadowColor: PropTypes.string,
   shadowX: PropTypes.number,
   shadowY: PropTypes.number,
   shadowOpacity: PropTypes.number,
   shadowRadius: PropTypes.number,
-  selectable: PropTypes.bool,
+
+  // Text Props
+  // ----------
+  lineHeight: PropTypes.number,
+  textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
+  bold: PropTypes.bool,
+  italic: PropTypes.bool,
   size: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
   ]),
-  overflow: PropTypes.oneOf(['normal', 'break', 'ellipsis']),
-  lineHeight: PropTypes.number,
+  selectable: PropTypes.bool,
+
+  // Link Props
+  // ----------
   link: PropTypes.bool,
   href: PropTypes.string,
+
+  // Event Props
+  // -----------
   onClick: PropTypes.func,
-  padding: PropTypes.number,
-  paddingX: PropTypes.number,
-  paddingY: PropTypes.number,
-  paddingTop: PropTypes.number,
-  paddingRight: PropTypes.number,
-  paddingBottom: PropTypes.number,
-  paddingLeft: PropTypes.number,
-  margin: PropTypes.number,
-  marginX: PropTypes.number,
-  marginY: PropTypes.number,
-  marginTop: PropTypes.number,
-  marginRight: PropTypes.number,
-  marginBottom: PropTypes.number,
-  marginLeft: PropTypes.number,
-  translation: PropTypes.string,
-  classes: PropTypes.object,
-  theme: PropTypes.object
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 }
 
 Text.defaultProps = {
-  display: 'flex',
-  align: 'left',
-  color: 'primary',
+  display: 'block',
+  position: 'initial',
   shadowColor: 'black',
+  shadowOpacity: 0.01,
   shadowX: 0,
   shadowY: 0,
   shadowRadius: 0,
-  shadowOpacity: 0.01,
-  size: 'sm',
-  overflow: 'normal',
-  marginY: 0
+  shadowBlur: 0,
+  borderColor: 'black',
+  tag: 'p'
 }
 
 export default injectSheet(styles)(Text)
