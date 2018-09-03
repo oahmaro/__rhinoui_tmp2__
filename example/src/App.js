@@ -91,58 +91,49 @@ export default class App extends Component {
             position='absolute'
             width='100%'
             height='100%' />
+
           <Box 
-            position='relative' 
-            zIndex={2} 
-            boxColor='fill6'
-            height={36} 
-            borderBottom={0.5}
-            justifyContent='between'
-            >
-            <Box>
-              <Icon color='primary' icon='app'/>
-              <Text paddingX={10} lineHeight={36} translation='جهات الاتصال' size='lg' color='primary'>Contacts</Text>
-              <Text paddingX={10} lineHeight={36} translation='تعديلات' size='sm' color='secondary'>Configurations</Text>
-            </Box>
-            <Box width={200} justifyContent='around'>
-              <Text lineHeight={36} translation='ملاحظات' size='sm' color='secondary'>Notification</Text>
-              <Text lineHeight={36} translation='الملف الشخصي' size='sm' color='secondary'>Profile</Text>
+            id='mainPanel'
+            zIndex={2}
+            borderBottom={1} 
+            borderColor='fill2'
+            boxColor='fill6' 
+            height={36}>
+            <Box marginX={20}>
+              <Text translation='جهات الاتصال' textColor='primary' lineHeight={36}>Contacts</Text>
             </Box>
           </Box>
           <Box 
-            position='relative' 
-            zIndex={1} 
-            alignItems='center' 
-            boxColor='fill4' 
-            height={36} 
-            borderBottom={0.5} 
-            shadowY={1} 
-            shadowRadius={2}
-            shadowBlur={5}
-            shadowOpacity={0.35}>
-            <Text 
-              marginX={20} 
-              lineHeight={36} 
-              translation='تغير المظهر' 
-              size='sm' 
-              color='key'
-              link>
-              Change Theme</Text>
-          </Box>
+            id='workspacePanel' 
+            alignItems='center'
+            shadowOpacity={0.5}
+            shadowY={1}
+            shadowBlur={10}
+            borderBottom={1}
+            borderColor='fill2'
+            boxColor='fill4'
+            height={36}>
+              <Box 
+                marginX={10} 
+                borderRadius={2} 
+                boxColor='key' 
+                width={100} 
+                height={26}>
+                  <Text translation='انشاء' size='xs' textColor='white' textAlign='center' lineHeight={26}>CREATE</Text>
+                </Box>
+            </Box>
           <Box 
+            id='helpPanel'
+            shadowOpacity={0.5}
+            shadowY={1}
+            shadowBlur={10} 
+            borderTop={1}
+            borderColor='fill2'
             position='absolute' 
             bottom 
-            zIndex={1} 
-            alignItems='center' 
             boxColor='fill4' 
             height={36} 
-            width='100%' 
-            borderTop={0.5}
-            shadowY={1}
-            shadowRadius={2}
-            shadowBlur={5}
-            shadowOpacity={0.35}
-            />
+            width='100%'></Box>
         </Fragment>
       </Rhino>
     )

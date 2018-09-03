@@ -7,7 +7,7 @@ const Box = ({...props}) => {
   return (
     <props.tag
       id={props.id}
-      className={props.classes.box}
+      className={`${props.classes.box} ${(props.jssStyles !== undefined) ? props.jssStyles : ''}`}
       style={props.style}
       onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
@@ -32,7 +32,8 @@ Box.propTypes = {
   classes: PropTypes.object,
   children: PropTypes.node,
   zIndex: PropTypes.number,
-  tag: PropTypes.oneOf(['div', 'p']),
+  tag: PropTypes.oneOf(['div', 'p', 'a']),
+  jssStyles: PropTypes.string,
 
   // Position Props
   // --------------
@@ -177,7 +178,9 @@ Box.defaultProps = {
   shadowX: 0,
   shadowY: 0,
   shadowRadius: 0,
-  shadowBlur: 0
+  shadowBlur: 0,
+  margin: 0,
+  padding: 0
 }
 
 export default injectSheet(styles)(Box)
