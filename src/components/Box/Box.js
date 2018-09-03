@@ -11,7 +11,8 @@ const Box = ({...props}) => {
       style={props.style}
       onClick={props.onClick}
       onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}>
+      onMouseLeave={props.onMouseLeave}
+      viewBox={props.viewBox}>
       { props.children }
     </props.tag>
   )
@@ -32,8 +33,9 @@ Box.propTypes = {
   classes: PropTypes.object,
   children: PropTypes.node,
   zIndex: PropTypes.number,
-  tag: PropTypes.oneOf(['div', 'p', 'a']),
+  tag: PropTypes.oneOf(['div', 'p', 'a', 'svg']),
   jssStyles: PropTypes.string,
+  viewBox: PropTypes.string,
 
   // Position Props
   // --------------

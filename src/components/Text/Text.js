@@ -23,7 +23,8 @@ const Text = ({...props}) => {
       onMouseLeave={props.onMouseLeave}
       boxColor={props.boxColor}
       boxHoverColor={props.boxHoverColor}
-      boxActiveColor={props.boxActiveColor}>
+      boxActiveColor={props.boxActiveColor}
+      draggable={false}>
       { (props.theme.lang.locale === 'en' && props.children) || (props.theme.lang.locale === 'ar' && (props.translation || 'no data')) }
     </Box>
   )

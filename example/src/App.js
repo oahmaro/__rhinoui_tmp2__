@@ -99,7 +99,8 @@ export default class App extends Component {
             borderColor='fill2'
             boxColor='fill6' 
             height={36}>
-            <Box marginX={20}>
+            <Box width='70%' marginX={20}>
+              <Icon iconColor='primary' padding={10} width={36} height={36} icon='app'/>
               <Text translation='جهات الاتصال' textColor='primary' lineHeight={36}>Contacts</Text>
             </Box>
           </Box>

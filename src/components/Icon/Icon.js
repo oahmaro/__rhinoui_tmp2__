@@ -2,43 +2,54 @@ import React from 'react'
 import injectSheet from 'react-jss'
 import PropTypes from 'prop-types'
 import { icons } from '../../utils/icons'
+import Box from '../Box'
+import { _styles } from './styles'
 
-const Icon = ({
-  theme,
-  classes,
-  style,
-  color,
-  size,
-  icon,
-  padding
-}) => {
+const Icon = ({...props}) => {
   return (
-    <svg className={classes.svg} style={style} viewBox='0 0 512 512'>
-      <path className={classes.path} d={icons[icon]} />
-    </svg>
+    <Box
+      margin={0}
+      padding={0}
+      id={props.id}
+      jssStyles={props.classes.svg}
+      style={props.style}
+      viewBox='0 0 512 512'
+      tag={'svg'}
+      onClick={props.onClick}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}>
+      <path className={props.classes.path} d={icons[props.icon]} />
+    </Box>
   )
 }
 
-const styles = ({ styles, sizes }) => ({
-  svg: {
-    display: 'flex',
-    boxSizing: 'border-box',
-    width: ({ size }) => (sizes !== undefined) && `${size}px`,
-    height: ({ size }) => (sizes !== undefined) && `${size}px`,
-    padding: ({ size, padding }) => (size !== undefined) && (padding ? `${padding}px` : `${size / (size / 10)}px`)
-  },
-  path: {
-    fill: ({ color }) => styles && (styles.text[color] || styles.state[color] || color)
-  }
-})
+// Styles logic is imported from _styles.js
+// Destructuring styles & lang from theme props passed from Rhino (Provider Component)
+// Theme object contains the following properties { theme, lang, sizes, styles, setTheme, setLang }
+const styles = ({ styles, sizes }) => _styles({ styles })
 
 Icon.propTypes = {
-  theme: PropTypes.object,
-  classes: PropTypes.object,
+  // Standard Props
+  // --------------
+  display: PropTypes.oneOf(['none', 'block']),
+  id: PropTypes.string,
   style: PropTypes.object,
-  color: PropTypes.string,
-  size: PropTypes.number,
+  classes: PropTypes.object,
+  tag: PropTypes.oneOf(['svg']),
+  theme: PropTypes.object,
+
+  // Color Props
+  // -----------
+  iconColor: PropTypes.string,
+  iconHoverColor: PropTypes.string,
+  iconActiveColor: PropTypes.string,
+
+  // SVG Props
+  // ---------
   padding: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  link: PropTypes.bool,
   icon: PropTypes.oneOf([
     'person',
     'app',
@@ -72,11 +83,16 @@ Icon.propTypes = {
     'server',
     'rhino',
     'rhinoText'
-  ])
+  ]),
+
+  // Event Props
+  // -----------
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 }
 
 Icon.defaultProps = {
-  size: 36
 }
 
 export default injectSheet(styles)(Icon)
