@@ -83,6 +83,6 @@ export const _styles = ({ styles, lang, sizes }) => ({
     fontSize: ({ size }) => (
       (sizes !== undefined) &&
       ((typeof size === 'string' && (`${sizes[size]}` || `${size}`)) || (typeof size === 'number' && `${size}px`))),
-    cursor: ({ link }) => link ? 'pointer' : 'auto'
+    cursor: ({ cursor }) => cursor
   }
 })
