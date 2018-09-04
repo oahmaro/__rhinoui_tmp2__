@@ -25,44 +25,46 @@ export const _styles = ({ styles, lang, sizes }) => ({
     },
     '&:hover': {
       color: ({ textHoverColor, link, textColor }) => {
-        if (textHoverColor !== undefined) {
-          if (styles && link) {
-            if (styles.text[textHoverColor]) {
-              return Color((styles.text[textHoverColor])).darken(0.20).rgb().string()
-            } else if (styles.state[textHoverColor]) {
-              return Color((styles.state[textHoverColor])).darken(0.20).rgb().string()
-            } else if (styles.ui[textHoverColor] !== undefined) {
-              return Color((styles.ui[textHoverColor])).darken(0.20).rgb().string()
-            } else return `${textHoverColor}`
-          }
-        } else if (styles && link) {
-          return Color(styles.text[textColor] || styles.state[textColor] || styles.ui[textColor] || textColor).darken(0.20).rgb().string()
+        if (styles && link) {
+          return (
+            Color(
+              (styles.text[textHoverColor]) ||
+              (styles.state[textHoverColor]) ||
+              (styles.ui[textHoverColor]) ||
+              (textHoverColor) ||
+              (styles.text[textColor]) ||
+              (styles.state[textColor]) ||
+              (styles.ui[textColor]) ||
+              (textColor)
+            ).darken(0.25).rgb().string()
+          )
         }
       }},
     '&:active': {
       color: ({ textActiveColor, link, textColor }) => {
-        if (textActiveColor !== undefined) {
-          if (styles && link) {
-            if (styles.text[textActiveColor]) {
-              return Color((styles.text[textActiveColor])).darken(0.50).rgb().string()
-            } else if (styles.state[textActiveColor]) {
-              return Color((styles.state[textActiveColor])).darken(0.50).rgb().string()
-            } else if (styles.ui[textActiveColor] !== undefined) {
-              return Color((styles.ui[textActiveColor])).darken(0.50).rgb().string()
-            } else return `${textActiveColor}`
-          }
-        } else if (styles && link) {
-          return Color(styles.text[textColor] || styles.state[textColor] || styles.ui[textColor] || textColor).darken(0.50).rgb().string()
+        if (styles && link) {
+          return (
+            Color(
+              (styles.text[textActiveColor]) ||
+              (styles.state[textActiveColor]) ||
+              (styles.ui[textActiveColor]) ||
+              (textActiveColor) ||
+              (styles.text[textColor]) ||
+              (styles.state[textColor]) ||
+              (styles.ui[textColor]) ||
+              (textColor)
+            ).darken(0.25).rgb().string()
+          )
         }
       }},
 
     // // Shadow Props
     // // ------------
-    textShadow: ({ shadowX, shadowY, shadowRadius, shadowOpacity, shadowColor }) => {
-      const _color = Color(shadowColor)
+    textShadow: ({ textShadowX, textShadowY, textShadowRadius, textShadowOpacity, textShadowColor }) => {
+      const _color = Color(textShadowColor)
       return (
-        (shadowX || shadowY) !== undefined
-          ? `${shadowX}px ${shadowY}px ${shadowRadius}px rgba(${_color.red()}, ${_color.green()}, ${_color.blue()}, ${_color.alpha() * shadowOpacity})`
+        (textShadowX || textShadowY) !== undefined
+          ? `${textShadowX}px ${textShadowY}px ${textShadowRadius}px rgba(${_color.red()}, ${_color.green()}, ${_color.blue()}, ${_color.alpha() * textShadowOpacity})`
           : ''
       )
     },

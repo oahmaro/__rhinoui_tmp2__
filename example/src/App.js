@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import { Text, Rhino, createTheme, Box, Icon } from 'rhinoui'
+import { Text, Rhino, createTheme, Box, Icon, Button } from 'rhinoui'
 
 const modifier = (theme = {}, newTheme) => {
   return {
@@ -44,7 +44,7 @@ theme.updateTheme({
       other: 'black'
     },
     state: {
-      key: '',
+      key: '#26AA91',
       success: '',
       warning: '',
       error: ''
@@ -99,9 +99,13 @@ export default class App extends Component {
             borderColor='fill2'
             boxColor='fill6' 
             height={36}>
-            <Box width='70%' marginX={20}>
-              <Icon iconColor='primary' padding={10} width={36} height={36} icon='app'/>
-              <Text translation='جهات الاتصال' textColor='primary' lineHeight={36}>Contacts</Text>
+            <Box width='auto' marginX={5}>
+              <Button link boxHoverColor='fill9'>
+                <Icon iconColor='primary' padding={10} width={36} height={36} icon='app'/>
+              </Button>
+              <Button link boxHoverColor='fill9' padding={10} marginX={10}>
+                <Text translation='جهات الاتصال' textColor='primary' lineHeight={16}>Contacts</Text>
+              </Button>
             </Box>
           </Box>
           <Box 
@@ -114,14 +118,28 @@ export default class App extends Component {
             borderColor='fill2'
             boxColor='fill4'
             height={36}>
-              <Box 
-                marginX={10} 
+              <Button
+                shadowOpacity={0.35}
+                shadowY={1}
+                shadowX={1}
+                shadowBlur={5}
+                justifyContent='evenly'
+                link
+                id='button'
+                marginX={15} 
                 borderRadius={2} 
                 boxColor='key' 
-                width={100} 
-                height={26}>
-                  <Text translation='انشاء' size='xs' textColor='white' textAlign='center' lineHeight={26}>CREATE</Text>
-                </Box>
+                width={72} 
+                height={22}>
+                  <Text 
+                    translation='انشاء' 
+                    size='xs' 
+                    textColor='white' 
+                    textAlign='center' 
+                    lineHeight={22}>
+                    CREATE
+                  </Text>
+              </Button>
             </Box>
           <Box 
             id='helpPanel'

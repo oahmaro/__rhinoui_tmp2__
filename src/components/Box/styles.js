@@ -45,34 +45,37 @@ export const _styles = ({ styles, lang }) => ({
     },
     '&:hover': {
       background: ({ boxHoverColor, link, boxColor }) => {
-        if (boxHoverColor !== undefined) {
-          if (styles && link) {
-            if (styles.text[boxHoverColor]) {
-              return Color((styles.text[boxHoverColor])).darken(0.20).rgb().string()
-            } else if (styles.state[boxHoverColor]) {
-              return Color((styles.state[boxHoverColor])).darken(0.20).rgb().string()
-            } else if (styles.ui[boxHoverColor] !== undefined) {
-              return Color((styles.ui[boxHoverColor])).darken(0.20).rgb().string()
-            } else return `${boxHoverColor}`
-          }
-        } else if (styles && link) {
-          return Color(styles.text[boxColor] || styles.state[boxColor] || styles.ui[boxColor] || boxColor).darken(0.20).rgb().string()
+        if (styles && link) {
+          return (
+            Color(
+              (styles.text[boxHoverColor]) ||
+              (styles.state[boxHoverColor]) ||
+              (styles.ui[boxHoverColor]) ||
+              (boxHoverColor) ||
+              (styles.text[boxColor]) ||
+              (styles.state[boxColor]) ||
+              (styles.ui[boxColor]) ||
+              (boxColor)
+            ).darken(0.25).rgb().string()
+          )
         }
-      }},
+      }
+    },
     '&:active': {
       background: ({ boxActiveColor, link, boxColor }) => {
-        if (boxActiveColor !== undefined) {
-          if (styles && link) {
-            if (styles.text[boxActiveColor]) {
-              return Color((styles.text[boxActiveColor])).darken(0.50).rgb().string()
-            } else if (styles.state[boxActiveColor]) {
-              return Color((styles.state[boxActiveColor])).darken(0.50).rgb().string()
-            } else if (styles.ui[boxActiveColor] !== undefined) {
-              return Color((styles.ui[boxActiveColor])).darken(0.50).rgb().string()
-            } else return `${boxActiveColor}`
-          }
-        } else if (styles && link) {
-          return Color(styles.text[boxColor] || styles.state[boxColor] || styles.ui[boxColor] || boxColor).darken(0.50).rgb().string()
+        if (styles && link) {
+          return (
+            Color(
+              (styles.text[boxActiveColor]) ||
+              (styles.state[boxActiveColor]) ||
+              (styles.ui[boxActiveColor]) ||
+              (boxActiveColor) ||
+              (styles.text[boxColor]) ||
+              (styles.state[boxColor]) ||
+              (styles.ui[boxColor]) ||
+              (boxColor)
+            ).darken(0.50).rgb().string()
+          )
         }
       }},
 
