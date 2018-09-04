@@ -21,6 +21,7 @@ export const _styles = ({ styles, lang }) => ({
     overflowY: ({ overflow }) => overflow === 'scrollY' && 'scroll',
     overflow: ({ overflow }) => `${overflow}`,
     zIndex: ({ zIndex }) => `${zIndex}`,
+    cursor: ({ cursor }) => cursor,
 
     // Position Props
     // --------------
@@ -78,6 +79,9 @@ export const _styles = ({ styles, lang }) => ({
           )
         }
       }},
+    '&:focus': {
+      background: 'green'
+    },
 
     // Width & Height Props
     // --------------------
