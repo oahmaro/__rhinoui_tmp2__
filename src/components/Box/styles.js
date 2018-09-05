@@ -35,13 +35,15 @@ export const _styles = ({ styles, lang }) => ({
     // --------------
     background: ({ boxColor }) => {
       if (styles) {
-        if (styles.text[boxColor] !== undefined) {
-          return `${styles.text[boxColor]}`
-        } else if (styles.ui[boxColor] !== undefined) {
-          return `${styles.ui[boxColor]}`
-        } else if (styles.state[boxColor] !== undefined) {
-          return `${styles.state[boxColor]}`
-        } else return `${boxColor}`
+        return (
+          (styles.text[boxColor]) ||
+          (styles.state[boxColor]) ||
+          (styles.ui[boxColor]) ||
+          (styles.text[boxColor]) ||
+          (styles.state[boxColor]) ||
+          (styles.ui[boxColor]) ||
+          (boxColor)
+        )
       }
     },
     '&:hover': {
