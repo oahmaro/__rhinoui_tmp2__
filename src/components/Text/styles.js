@@ -14,13 +14,15 @@ export const _styles = ({ styles, lang, sizes }) => ({
     // // -----------
     color: ({ textColor }) => {
       if (styles) {
-        if (styles.text[textColor]) {
-          return `${styles.text[textColor]}`
-        } else if (styles.ui[textColor]) {
-          return `${styles.ui[textColor]}`
-        } else if (styles.state[textColor]) {
-          return `${styles.state[textColor]}`
-        } else return `${textColor}`
+        return (
+          (styles.text[textColor]) ||
+          (styles.state[textColor]) ||
+          (styles.ui[textColor]) ||
+          (styles.text[textColor]) ||
+          (styles.state[textColor]) ||
+          (styles.ui[textColor]) ||
+          (textColor)
+        )
       }
     },
     '&:hover': {
