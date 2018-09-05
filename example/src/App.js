@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { _theme } from './utils/theme'
-import { Rhino, createTheme, Box } from 'rhinoui'
+import { Rhino, createTheme } from 'rhinoui'
 import MainPanel from './components/MainPanel/MainPanel'
 import WorkspacePanel from './components/WorkspacePanel/WorkspacePanel'
 import HelpPanel from './components/HelpPanel/HelpPanel'

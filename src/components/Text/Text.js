@@ -9,6 +9,8 @@ const Text = ({...props}) => {
   return (
     <Box
       {...props}
+      boxHoverColor=''
+      boxActiveColor=''
       overflow='visible' // overwrite text overflow with box overflow
       jssStyles={props.classes.text}
       tag={!props.link ? 'p' : 'a'} // render a <p> or a <a> element

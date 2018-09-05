@@ -15,12 +15,12 @@ class WorkspacePanel extends React.Component {
         boxColor='fill4'
         height={36}>
         <Button
+          cursor='pointer'
           shadowOpacity={0.35}
           shadowY={1}
           shadowX={1}
           shadowBlur={5}
           justifyContent='evenly'
-          link
           id='button'
           marginX={10} 
           borderRadius={2} 
@@ -28,6 +28,7 @@ class WorkspacePanel extends React.Component {
           width={72} 
           height={22}>
             <Text 
+              
               disabled
               translation='انشاء' 
               size='xs' 

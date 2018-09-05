@@ -47,40 +47,44 @@ export const _styles = ({ styles, lang }) => ({
     '&:hover': {
       background: ({ boxHoverColor, link, boxColor }) => {
         if (styles && link) {
-          return (
-            Color(
-              (styles.text[boxHoverColor]) ||
-              (styles.state[boxHoverColor]) ||
-              (styles.ui[boxHoverColor]) ||
-              (boxHoverColor) ||
-              (styles.text[boxColor]) ||
-              (styles.state[boxColor]) ||
-              (styles.ui[boxColor]) ||
-              (boxColor)
-            ).darken(0.25).rgb().string()
-          )
+          if (boxHoverColor !== undefined) {
+            return boxHoverColor
+          } else {
+            return (
+              Color(
+                (styles.text[boxHoverColor]) ||
+                (styles.state[boxHoverColor]) ||
+                (styles.ui[boxHoverColor]) ||
+                (styles.text[boxColor]) ||
+                (styles.state[boxColor]) ||
+                (styles.ui[boxColor]) ||
+                (boxColor)
+              ).darken(0.25).rgb().string()
+            )
+          }
         }
       }
     },
     '&:active': {
       background: ({ boxActiveColor, link, boxColor }) => {
         if (styles && link) {
-          return (
-            Color(
-              (styles.text[boxActiveColor]) ||
-              (styles.state[boxActiveColor]) ||
-              (styles.ui[boxActiveColor]) ||
-              (boxActiveColor) ||
-              (styles.text[boxColor]) ||
-              (styles.state[boxColor]) ||
-              (styles.ui[boxColor]) ||
-              (boxColor)
-            ).darken(0.50).rgb().string()
-          )
+          if (boxActiveColor !== undefined) {
+            return boxActiveColor
+          } else {
+            return (
+              Color(
+                (styles.text[boxActiveColor]) ||
+                (styles.state[boxActiveColor]) ||
+                (styles.ui[boxActiveColor]) ||
+                (styles.text[boxColor]) ||
+                (styles.state[boxColor]) ||
+                (styles.ui[boxColor]) ||
+                (boxColor)
+              ).darken(0.50).rgb().string()
+            )
+          }
         }
-      }},
-    '&:focus': {
-      background: 'green'
+      }
     },
 
     // Width & Height Props
