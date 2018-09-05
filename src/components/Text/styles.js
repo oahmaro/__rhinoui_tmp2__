@@ -26,35 +26,41 @@ export const _styles = ({ styles, lang, sizes }) => ({
     '&:hover': {
       color: ({ textHoverColor, link, textColor }) => {
         if (styles && link) {
-          return (
-            Color(
-              (styles.text[textHoverColor]) ||
-              (styles.state[textHoverColor]) ||
-              (styles.ui[textHoverColor]) ||
-              (textHoverColor) ||
-              (styles.text[textColor]) ||
-              (styles.state[textColor]) ||
-              (styles.ui[textColor]) ||
-              (textColor)
-            ).darken(0.25).rgb().string()
-          )
+          if (textHoverColor !== undefined) {
+            return textHoverColor
+          } else {
+            return (
+              Color(
+                (styles.text[textHoverColor]) ||
+                (styles.state[textHoverColor]) ||
+                (styles.ui[textHoverColor]) ||
+                (styles.text[textColor]) ||
+                (styles.state[textColor]) ||
+                (styles.ui[textColor]) ||
+                (textColor)
+              ).darken(0.25).rgb().string()
+            )
+          }
         }
       }},
     '&:active': {
       color: ({ textActiveColor, link, textColor }) => {
         if (styles && link) {
-          return (
-            Color(
-              (styles.text[textActiveColor]) ||
-              (styles.state[textActiveColor]) ||
-              (styles.ui[textActiveColor]) ||
-              (textActiveColor) ||
-              (styles.text[textColor]) ||
-              (styles.state[textColor]) ||
-              (styles.ui[textColor]) ||
-              (textColor)
-            ).darken(0.25).rgb().string()
-          )
+          if (textActiveColor !== undefined) {
+            return textActiveColor
+          } else {
+            return (
+              Color(
+                (styles.text[textActiveColor]) ||
+                (styles.state[textActiveColor]) ||
+                (styles.ui[textActiveColor]) ||
+                (styles.text[textColor]) ||
+                (styles.state[textColor]) ||
+                (styles.ui[textColor]) ||
+                (textColor)
+              ).darken(0.50).rgb().string()
+            )
+          }
         }
       }},
 

@@ -12,10 +12,10 @@ class MainPanel extends React.Component {
         boxColor='fill6' 
         height={36}>
         <Box width='auto' marginX={5}>
-          <Button link boxHoverColor='fill9'>
+          <Button link>
             <Icon iconColor='primary' padding={10} width={36} height={36} icon='app'/>
           </Button>
-          <Button link boxHoverColor='fill9' alignItems='center' marginX={10}>
+          <Button link alignItems='center' marginX={10}>
             <Text translation='جهات الاتصال' textColor='primary' lineHeight={36}>Contacts</Text>
           </Button>
         </Box>
